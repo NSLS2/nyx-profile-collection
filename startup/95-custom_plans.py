@@ -51,3 +51,4 @@ from bluesky.plan_stubs import null
 def hello_world_plan():
     print("Hello, world!")
     yield from null()
+
