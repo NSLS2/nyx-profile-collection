@@ -140,3 +140,6 @@ db
 
 # IPython/Jupyter Notebooks
 .ipynb_checkpoints
+# pixi environments
+.pixi/*
+!.pixi/config.toml
