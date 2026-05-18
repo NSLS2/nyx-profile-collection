@@ -50,17 +50,28 @@ from IPython import get_ipython
 # Base configuration
 #  pbar=False disables progress bar (undesirable in Jupyter)
 #  bec=False disables Best Effort Callback (seems to be causing issues)
-nslsii.configure_base(get_ipython().user_ns, "nyx", pbar=False, bec=True)
+nslsii.configure_base(get_ipython().user_ns, "nyx", pbar=False, bec=True, publish_documents_with_kafka=False,
+                      redis_ssl=True,
+                      redis_port=6380,
+                      redis_url='xf19id2-nyx-redis1.nsls2.bnl.gov')
 
-try:
-    from bluesky.utils import PersistentDict
-    runengine_metadata_dir = appdirs.user_data_dir(appname="bluesky") / Path(
-        "runengine-metadata"
-    )
-    # PersistentDict will create the directory if it does not exist
-    RE.md = PersistentDict(runengine_metadata_dir)
-except ImportError:
-    print('Older bluesky did not have PersistentDict, moving on.')
+#import redis
+#from redis_json_dict import RedisJSONDict
+
+#uri = "info.nyx.nsls2.bnl.gov"
+#new_md = RedisJSONDict(redis.Redis(uri), prefix="")
+
+#try:
+#    from bluesky.utils import PersistentDict
+#    runengine_metadata_dir = appdirs.user_data_dir(appname="bluesky") / Path(
+#        "runengine-metadata"
+#    )
+#    # PersistentDict will create the directory if it does not exist
+#    RE.md = PersistentDict(runengine_metadata_dir)
+#except ImportError:
+#    print('Older bluesky did not have PersistentDict, moving on.')
+
+#RE.md = new_md
 
 RE.md["beamline_name"] = "NYX"
 RE.md["facility"] = "NSLS-II"
